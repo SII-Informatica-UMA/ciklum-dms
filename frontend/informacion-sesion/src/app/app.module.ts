@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DetalleContactoComponent } from './detalle-contacto/detalle-contacto.component';
-import { FormularioContactoComponent } from './formulario-contacto/formulario-contacto.component';
+import { DetalleSesionComponent } from './detalle-sesion/detalle-sesion.component';
+import { FormularioSesionComponent } from './formulario-sesion/formulario-sesion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DetalleContactoComponent,
-    FormularioContactoComponent
+    DetalleSesionComponent,
+    FormularioSesionComponent
   ],
   imports: [
     BrowserModule,
