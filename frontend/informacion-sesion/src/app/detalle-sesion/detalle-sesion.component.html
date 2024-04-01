@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row">
-    <h2 >Detalles de {{sesion?.idPlan}}</h2>
+    <h2 >Detalles de {{sesion?.trabajoRealizado}}</h2>
   </div>
 
 <div class="row">
   <label class="col-md-3" for="id">Inicio:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.inicio}}</span>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.inicio?.toDateString()}}</span>
 </div>
 <div class="row">
   <label class="col-md-3" for="id">Fin:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.fin}}</span>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.fin?.toDateString()}}</span>
 </div>
 <div class="row">
   <label class="col-md-3" for="id">Trabajo realizado:</label>
