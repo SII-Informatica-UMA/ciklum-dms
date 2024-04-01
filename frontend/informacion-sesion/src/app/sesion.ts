@@ -1,8 +1,8 @@
 
 export interface Sesion {
   idPlan: number;
-  inicio: Date;
-  fin: Date;
+  inicio: Date | undefined;
+  fin: Date | undefined;
   trabajoRealizado: string;
   multimedia: string[];
   descripcion: string;
