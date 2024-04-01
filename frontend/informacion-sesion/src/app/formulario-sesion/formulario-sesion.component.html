@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{accion}} contacto</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+      <label for="inicio">Fecha Inicio:</label>
+      <input class="form-control" type="datetime" id="inicio" [(ngModel)]="sesion.inicio">
+      <label for="fin">Fecha Fin:</label>
+      <input class="form-control" type="datetime" id="finF" [(ngModel)]="sesion.fin">
+      <label for="trabajo">Trabajo Realizado:</label>
+      <input class="form-control" id="trabajo" [(ngModel)]="sesion.trabajoRealizado">
+      <label for="descripcion">Descripción:</label>
+      <textarea class="form-control" id="descripcion" [(ngModel)]="sesion.descripcion">
+      <label for="presencial">Presencial:</label>
+      <input class="form-control" name="presencial" type="radio" value="True" [(ngModel)]="sesion.presencial"> Si
+      <input class="form-control" name="presencial" type="radio" value="False" [(ngModel)]="sesion.presencial"> No
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="guardarContacto()">Guardar</button>
+</div>

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormularioContactoComponent } from './formulario-contacto.component';
+import { FormularioContactoComponent } from './formulario-sesion.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
