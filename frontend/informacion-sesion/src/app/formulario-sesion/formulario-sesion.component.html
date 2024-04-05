@@ -5,18 +5,18 @@
 <div class="modal-body">
   <div class="form-group">
       <label for="inicio">Fecha Inicio:</label>
-      <input class="form-control" type="datetime" id="inicio" [(ngModel)]="sesion.inicio">
+      <input class="form-control" type="date" id="inicio" [(ngModel)] = "sesion.inicio">
       <label for="fin">Fecha Fin:</label>
-      <input class="form-control" type="datetime" id="finF" [(ngModel)]="sesion.fin">
+      <input class="form-control" type="date" id="finF" [(ngModel)]="sesion.fin">
       <label for="trabajo">Trabajo Realizado:</label>
-      <input class="form-control" id="trabajo" [(ngModel)]="sesion.trabajoRealizado">
+      <input class="form-control" type="text" id="trabajo" [(ngModel)]="sesion.trabajoRealizado">
       <label for="descripcion">Descripción:</label>
-      <textarea class="form-control" id="descripcion" [(ngModel)]="sesion.descripcion"> </textarea>
+      <textarea class="form-control" type="text" id="descripcion" [(ngModel)]="sesion.descripcion"> </textarea>
       <label for="presencial">Presencial:</label>
       <input class="form-control" name="presencial" type="radio" value="True" [(ngModel)]="sesion.presencial"> Si
       <input class="form-control" name="presencial" type="radio" value="False" [(ngModel)]="sesion.presencial"> No
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="guardarContacto()">Guardar</button>
+  <button type="button" class="btn btn-outline-dark" (click)="guardarSesion()">Guardar sesión</button>
 </div>

@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import  {Sesion} from '../sesion';
+import  {Sesion} from '../entities/sesion';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
+  standalone:true,
+  imports:[CommonModule,FormsModule],
   selector: 'app-formulario-sesion',
   templateUrl: './formulario-sesion.component.html',
   styleUrls: ['./formulario-sesion.component.css']
@@ -14,8 +19,7 @@ export class FormularioSesionComponent {
 
   constructor(public modal: NgbActiveModal) { }
 
-  guardarContacto(): void {
+  guardarSesion(): void {
     this.modal.close(this.sesion);
   }
-
 }

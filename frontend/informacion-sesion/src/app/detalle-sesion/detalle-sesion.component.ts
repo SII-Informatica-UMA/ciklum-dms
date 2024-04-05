@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {Sesion } from '../sesion';
+import {Sesion } from '../entities/sesion';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
 import { SesionesService } from '../sesiones.service';
 
 @Component({
   selector: 'app-detalle-sesion',
+  standalone: true,
   templateUrl: './detalle-sesion.component.html',
   styleUrls: ['./detalle-sesion.component.css']
 })

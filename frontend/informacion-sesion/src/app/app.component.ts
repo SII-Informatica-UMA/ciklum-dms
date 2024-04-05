@@ -1,47 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import {Sesion } from './sesion';
-import {SesionesService } from './sesiones.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.component'
+import { Component } from '@angular/core';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { UsuariosService } from './services/usuarios.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, CommonModule, RouterLink, FormsModule, TitleCasePipe],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  sesiones: Sesion [] = [];
-  sesionElegida?: Sesion;
+export class AppComponent {
+  _rolIndex: number = 0
 
-  constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
-
-  ngOnInit(): void {
-    this.sesiones = this.sesionesService.getSesiones();
+  constructor(private usuarioService: UsuariosService, private router: Router) {
+    this.actualizarRol()
   }
 
-  elegirSesion(sesion: Sesion): void {
-    this.sesionElegida = sesion;
+  get rolIndex() {
+    return this._rolIndex;
   }
 
-  aniadirSesion(): void {
-    let ref = this.modalService.open(FormularioSesionComponent);
-    ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.sesion = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
-    ref.result.then((sesion: Sesion) => {
-      this.sesionesService.addSesion(sesion);
-      this.sesiones = this.sesionesService.getSesiones();
-    }, (reason) => {});
-
-  }
-  sesionEditada(sesion: Sesion): void {
-    this.sesionesService.editarSesion(sesion);
-    this.sesiones = this.sesionesService.getSesiones();
-    this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);
+  set rolIndex(i: number) {
+    this._rolIndex = i;
+    this.actualizarRol();
   }
 
-  eliminarSesion(id: number): void {
-    this.sesionesService.eliminarSesion(id);
-    this.sesiones = this.sesionesService.getSesiones();
-    this.sesionElegida = undefined;
+  actualizarRol() {
+    let u = this.usuarioSesion;
+    if (u) {
+      this.usuarioService.rolCentro = u.roles[this.rolIndex];
+    } else {
+      this.usuarioService.rolCentro = undefined;
+    }
+  }
+
+  get rol() {
+    return this.usuarioService.rolCentro;
+  }
+
+  get usuarioSesion() {
+    return this.usuarioService.getUsuarioSesion();
+  }
+
+  logout() {
+    this.usuarioService.doLogout();
+    this.actualizarRol();
+    this.router.navigateByUrl('/login');
   }
 }

@@ -1,23 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-      <h1>Lista de sesiones</h1>
-      <div class="list-group">
-        <button *ngFor="let sesion of sesiones"
-          class="list-group-item list-group-item-action"
-          (click)="elegirSesion(sesion)"
-          [class.active]="sesion === sesionElegida">{{sesion.trabajoRealizado}}</button>
-      </div>
-      <br>
-      <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()">Añadir Sesion</button>
+    <h3 class="col-6">Gestión de entrenamientos deportivos</h3>
+    <div class="col" *ngIf="usuarioSesion">
+      <p class="align-middle m-1">Bienvenido, {{usuarioSesion.nombre}}</p>
     </div>
-    <div class="col-md-6" *ngIf="sesionElegida">
-      <app-detalle-sesion [sesion]="sesionElegida"
-        (sesionEditada)="sesionEditada($event)"
-        (sesionEliminada)="eliminarSesion($event)"
-        ></app-detalle-sesion>
+    <div class="col-2" >
+      <select *ngIf="usuarioSesion" class="form-select" [(ngModel)]="rolIndex">
+        <option *ngFor="let rol of usuarioSesion.roles, let i = index" [value]="i" >{{rol.rol | titlecase}} {{rol.nombreCentro?'en '+rol.nombreCentro:''}}</option>
+      </select>
+    </div>
+    <div class="col-2 m-1">
+      <a *ngIf="!usuarioSesion"  [routerLink]="'/login'"><button class="btn btn-primary">Iniciar sesión</button></a>
+      <button *ngIf="usuarioSesion"  class="btn btn-primary" (click)="logout()">Cerrar sesión</button>
     </div>
   </div>
 </div>
 
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <div class="collapse navbar-collapse">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="'/'">Home</a>
+    </div>
+  </div>
+</nav>
 
+<router-outlet />
