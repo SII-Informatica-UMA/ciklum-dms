@@ -5,11 +5,11 @@
 
 <div class="row">
   <label class="col-md-3" for="id">Inicio:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.inicio?.toDateString()}}</span>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm:ss'}}</span>
 </div>
 <div class="row">
   <label class="col-md-3" for="id">Fin:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.fin?.toDateString()}}</span>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.fin| date:'dd/MM/yyyy HH:mm:ss'}}</span>
 </div>
 <div class="row">
   <label class="col-md-3" for="id">Trabajo realizado:</label>

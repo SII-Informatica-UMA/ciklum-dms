@@ -3,10 +3,12 @@ import {Sesion } from '../entities/sesion';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
 import { SesionesService } from '../sesiones.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-sesion',
   standalone: true,
+  imports: [DatePipe],
   templateUrl: './detalle-sesion.component.html',
   styleUrls: ['./detalle-sesion.component.css']
 })
