@@ -28,9 +28,16 @@
   <span class="col-md-9 offset-2 offset-md-0">{{sesion?.presencial}}</span>
 </div>
 <div class="row">
-  <label class="col-md-3" for="id">Datos de salud:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.datosSalud}}</span>
+  <label class="col-md-3" for="id">Pulsaciones:</label> 
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.datosSalud?.at(0)}}</span>
+  <label class="col-md-3" for="id">Peso:</label> 
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.datosSalud?.at(1)}}</span>
+  <label class="col-md-3" for="id">Calorías estimadas:</label> 
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.datosSalud?.at(2)}}</span>
+  <label class="col-md-3" for="id">Tiempo de ejercicio:</label> 
+  <span class="col-md-9 offset-2 offset-md-0"> {{sesion?.datosSalud?.at(3)}}</span>
 </div>
+
 
 
 <div class="row">

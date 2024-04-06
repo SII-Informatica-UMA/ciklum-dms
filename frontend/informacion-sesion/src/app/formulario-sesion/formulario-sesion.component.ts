@@ -22,4 +22,6 @@ export class FormularioSesionComponent {
   guardarSesion(): void {
     this.modal.close(this.sesion);
   }
+
+  
 }
