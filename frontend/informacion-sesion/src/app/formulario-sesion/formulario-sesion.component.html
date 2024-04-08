@@ -1,24 +1,30 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">{{accion}} contacto</h4>
+  <h4 class="modal-title" id="modal-basic-title">{{accion}} sesión</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
 </div>
 <div class="modal-body">
   <div class="form-group">
-      <label for="inicio">Fecha Inicio:</label>
-      <input class="form-control" type="date" id="inicio" [(ngModel)] = "sesion.inicio">
-      <label for="fin">Fecha Fin:</label>
-      <input class="form-control" type="date" id="finF" [(ngModel)]="sesion.fin">
       <label for="trabajo">Trabajo Realizado:</label>
-      <input class="form-control" type="text" id="trabajo" [(ngModel)]="sesion.trabajoRealizado">
+      <input class="form-control" type="text" id="trabajo" [(ngModel)]= "sesion.trabajoRealizado">
+      <label for="inicio">Fecha Inicio:</label>
+      <input class="form-control" type="datetime-local" id="inicio" [value]="sesion.inicio | date:'dd/MM/yyyy HH:mm:ss'" [(ngModel)]= "sesion.inicio">
+      <label for="fin">Fecha Fin:</label>
+      <input class="form-control" type="datetime-local" id="finF" [value]="sesion.fin | date:'dd/MM/yyyy HH:mm:ss'" [(ngModel)]= "sesion.fin">
       <label for="descripcion">Descripción:</label>
-      <textarea class="form-control" type="text" id="descripcion" [(ngModel)]="sesion.descripcion"> </textarea>
+      <textarea class="form-control" type="text" id="descripcion" [(ngModel)]= "sesion.descripcion"> </textarea>
       <label for="multimedia">Multimedia:</label>
       <textarea class="form-control" type="text" id="multimedia" [(ngModel)]="multimedia"> </textarea>
-      <label for="presencial">Presencial:</label>
-      <input class="form-control" name="presencial" type="radio" value="True" [(ngModel)]="sesion.presencial"> Si
-      <input class="form-control" name="presencial" type="radio" value="False" [(ngModel)]="sesion.presencial"> No
-      <label for="datosSalud">Datos salud:</label>
-      <textarea class="form-control" type="text" id="datosSalud" [(ngModel)]="sesion.datosSalud"> </textarea>
+      <label for="presencial">Presencial:&emsp;</label>
+      <input class="form-check-input" id="presencial" name="presencial" [(ngModel)]= "sesion.presencial"
+      type="checkbox"><label class="form-check-label" for="presencial"></label><br>
+      <label for="pulsaciones">Pulsaciones del corazón:</label><br>
+      <input class="form-control" type="text" id="pulsaciones" [(ngModel)]= "sesion.datosSalud[0]">
+      <label for="pulsaciones">Peso (en kg):</label><br>
+      <input class="form-control" type="text" id="peso" [(ngModel)]= "sesion.datosSalud[1]">
+      <label for="pulsaciones">Calorías consumidas estimadas:</label><br>
+      <input class="form-control" type="text" id="calorias" [(ngModel)]= "sesion.datosSalud[2]">
+      <label for="pulsaciones">Tiempo de ejercicio:</label><br>
+      <input class="form-control" type="text" id="tiempo" [(ngModel)]= "sesion.datosSalud[3]">
   </div>
 </div>
 <div class="modal-footer">

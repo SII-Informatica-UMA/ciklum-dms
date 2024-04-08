@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Lista de sesiones</h1>
+      <div class="list-group">
+        <button *ngFor="let sesion of sesiones"
+          class="list-group-item list-group-item-action"
+          (click)="elegirSesion(sesion)"
+          [class.active]="sesion === sesionElegida">{{sesion.trabajoRealizado}}</button>
+      </div>
+      <br>
+      <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()">Añadir Sesion</button>
+    </div>
+    <div class="col-md-6" *ngIf="sesionElegida">
+      <app-detalle-sesion [sesion]="sesionElegida"
+        (sesionEditada)="sesionEditada($event)"
+        (sesionEliminada)="eliminarSesion($event)"
+        ></app-detalle-sesion>
+    </div>
+  </div>
+</div>
+
+
