@@ -21,7 +21,7 @@ export class FormularioSesionComponent {
   constructor(public modal: NgbActiveModal) { }
 
   guardarSesion(): void {
-    this.sesion.multimedia = this.multimedia.split(" ");
+    this.sesion.multimedia = this.multimedia.split(" \n");
     this.modal.close(this.sesion);
 
   }
