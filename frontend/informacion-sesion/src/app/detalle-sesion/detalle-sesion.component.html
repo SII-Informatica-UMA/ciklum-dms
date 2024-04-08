@@ -17,7 +17,8 @@
 </div>
 <div class="row">
   <label class="col-md-3" for="id">Multimedia:</label>
-  <span class="col-md-9 offset-2 offset-md-0"><ul>
+  <span class="col-md-9 offset-2 offset-md-0">
+    <ul>
     @for (m of sesion?.multimedia; track $index){
       <li><a [href]= "m" >{{m}}</a></li>
     }

@@ -4,14 +4,16 @@
 </div>
 <div class="modal-body">
   <div class="form-group">
-      <label for="inicio">Fecha Inicio:</label>
-      <input class="form-control" type="datetime-local" id="inicio" [(ngModel)]= "sesion.inicio">
-      <label for="fin">Fecha Fin:</label>
-      <input class="form-control" type="datetime-local" id="finF" [(ngModel)]= "sesion.fin">
       <label for="trabajo">Trabajo Realizado:</label>
       <input class="form-control" type="text" id="trabajo" [(ngModel)]= "sesion.trabajoRealizado">
+      <label for="inicio">Fecha Inicio:</label>
+      <input class="form-control" type="datetime-local" id="inicio" [value]="sesion.inicio | date:'dd/MM/yyyy HH:mm:ss'" [(ngModel)]= "sesion.inicio">
+      <label for="fin">Fecha Fin:</label>
+      <input class="form-control" type="datetime-local" id="finF" [value]="sesion.fin | date:'dd/MM/yyyy HH:mm:ss'" [(ngModel)]= "sesion.fin">
       <label for="descripcion">Descripción:</label>
       <textarea class="form-control" type="text" id="descripcion" [(ngModel)]= "sesion.descripcion"> </textarea>
+      <label for="multimedia">Multimedia:</label>
+      <textarea class="form-control" type="text" id="multimedia" [(ngModel)]="multimedia"> </textarea>
       <label for="presencial">Presencial:&emsp;</label>
       <input class="form-check-input" id="presencial" name="presencial" [(ngModel)]= "sesion.presencial"
       type="checkbox"><label class="form-check-label" for="presencial"></label><br>
