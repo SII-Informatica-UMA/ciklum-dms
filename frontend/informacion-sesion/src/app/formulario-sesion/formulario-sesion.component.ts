@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class FormularioSesionComponent {
   accion!: "Añadir" | "Editar";
-  multimedia!: string 
+  multimedia: string = "";
   sesion: Sesion = {id: 0, inicio: undefined , fin: undefined, idPlan: 0, trabajoRealizado: '', multimedia: [],
                     descripcion: '', datosSalud: [], presencial: false};
 

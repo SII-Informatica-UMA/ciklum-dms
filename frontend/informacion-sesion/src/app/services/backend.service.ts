@@ -4,6 +4,7 @@ import { Usuario } from "../entities/usuario";
 import { HttpClient } from "@angular/common/http";
 import { BACKEND_URI } from "../config/config";
 import { JwtResponse } from "../entities/login";
+import { Sesion } from "../entities/sesion";
 
 // Este servicio usa el backend real
 
@@ -45,5 +46,26 @@ export class BackendService {
 
   resetPassword(token: string, password: string): Observable<void> {
     return this.httpClient.post<void>(BACKEND_URI + '/passwordreset', {token: token, password: password});
+  }
+
+  getSesiones(idPlan: number):Observable<Sesion[]>{
+    return this.httpClient.get<Sesion[]>(BACKEND_URI + '/sesion?plan=' + idPlan);
+  }
+
+  getSesion(idSesion: number): Observable<Sesion>{
+    return this.httpClient.get<Sesion>(BACKEND_URI + '/sesion/' + idSesion);
+  }
+
+  postSesion(sesion: Sesion): Observable<Sesion>{
+    return this.httpClient.post<Sesion>(BACKEND_URI + '/sesion?plan=' + sesion.idPlan, sesion);
+  }
+
+  putSesion(sesion:Sesion):Observable<Sesion>{
+    return this.httpClient.put<Sesion>(BACKEND_URI + '/sesion/' + sesion.id, sesion);
+
+  }
+
+  deleteSesion(id:number): Observable<void>{
+    return this.httpClient.delete<void>(BACKEND_URI + '/sesion/' + id);
   }
 }

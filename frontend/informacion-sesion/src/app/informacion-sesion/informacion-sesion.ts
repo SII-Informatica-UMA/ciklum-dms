@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {Sesion } from './sesion';
-import {SesionesService } from './sesiones.service';
+import {Sesion } from '../entities/sesion';
+import {SesionesService } from '../services/sesiones.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.component'
+import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
+import { DetalleSesionComponent } from '../detalle-sesion/detalle-sesion.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [DetalleSesionComponent,CommonModule],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './informacion-sesion.html',
+  styleUrls: ['./informacion-sesion.css']
 })
 export class AppComponent implements OnInit {
   sesiones: Sesion [] = [];
