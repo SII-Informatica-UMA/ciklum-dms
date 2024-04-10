@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Sesion } from '../entities/sesion'
+import { Observable } from 'rxjs';
+import { BackendService } from './backend.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +13,22 @@ export class SesionesService {
     {idPlan: 2, inicio:new Date('2024-02-01 08:00:00') ,fin:new Date('2024-02-21 08:00:00'),trabajoRealizado:"Circuito 3",multimedia:[],descripcion:"Realiza el circuito general",presencial:true,datosSalud:[],id:3},
   ];
 
-  constructor() { }
+  constructor(private backend: BackendService) { }
 
-  getSesiones(): Sesion [] {
-    return this.sesiones;
+  getSesiones(): Observable<Sesion []> {
+    return this.backend.getSesiones(0);
   }
 
-  addSesion(sesion: Sesion) {
+  addSesion(sesion: Sesion): Observable<Sesion> {
     sesion.id = Math.max(...this.sesiones.map(c => c.id)) + 1;
-    this.sesiones.push(sesion);
+    return this.backend.postSesion(sesion);
   }
 
-  editarSesion(sesion: Sesion) {
-    let indice = this.sesiones.findIndex(c => c.id == sesion.id);
-    this.sesiones[indice] = sesion;
+  editarSesion(sesion: Sesion): Observable<Sesion> {
+    return this.backend.putSesion(sesion);
   }
 
-  eliminarSesion(id: number) {
-    let indice = this.sesiones.findIndex(c => c.id == id);
-    this.sesiones.splice(indice, 1);
+  eliminarSesion(id: number): Observable<void> {
+    return this.backend.deleteSesion(id);
   }
 }

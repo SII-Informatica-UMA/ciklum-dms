@@ -7,6 +7,9 @@ import { DetalleSesionComponent } from '../detalle-sesion/detalle-sesion.compone
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Usuario } from '../entities/usuario';
+import { UsuariosService } from '../services/usuarios.service';
+import { Plan } from '../entities/plan';
 
 @Component({
   standalone: true,
@@ -17,12 +20,20 @@ import { CommonModule } from '@angular/common';
 })
 export class InformacionSesion implements OnInit {
   sesiones: Sesion [] = [];
+  planes: Plan[] = [];
   sesionElegida?: Sesion;
-
-  constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
+  constructor(private sesionesService: SesionesService, private usuariosService: UsuariosService, private modalService: NgbModal) { 
+    this.actualizarSesiones();
+  }
 
   ngOnInit(): void {
-    this.sesiones = this.sesionesService.getSesiones();
+    this.actualizarSesiones();
+  }
+
+  actualizarSesiones() {
+    this.sesionesService.getSesiones().subscribe(sesiones => {
+      this.sesiones = this.sesiones;
+    });
   }
 
   elegirSesion(sesion: Sesion): void {
@@ -34,20 +45,23 @@ export class InformacionSesion implements OnInit {
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.sesion = {idPlan: 0,trabajoRealizado:"",multimedia:[],descripcion:"",presencial:true,datosSalud:[],id:0};
     ref.result.then((sesion: Sesion) => {
-      this.sesionesService.addSesion(sesion);
-      this.sesiones = this.sesionesService.getSesiones();
+      this.sesionesService.addSesion(sesion).subscribe(sesion =>{
+        this.actualizarSesiones();
+      })
     }, (reason) => {});
 
   }
   sesionEditada(sesion: Sesion): void {
-    this.sesionesService.editarSesion(sesion);
-    this.sesiones = this.sesionesService.getSesiones();
-    this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);
+    this.sesionesService.editarSesion(sesion).subscribe(() => {
+      this.actualizarSesiones();
+    });
   }
 
   eliminarSesion(id: number): void {
-    this.sesionesService.eliminarSesion(id);
-    this.sesiones = this.sesionesService.getSesiones();
-    this.sesionElegida = undefined;
+    this.sesionesService.eliminarSesion(id).subscribe(() => {
+      this.actualizarSesiones();
+    });
   }
+
+  
 }

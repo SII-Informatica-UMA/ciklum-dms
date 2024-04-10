@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { BACKEND_URI } from "../config/config";
 import { JwtResponse } from "../entities/login";
 import { Sesion } from "../entities/sesion";
+import { AsignacionEntrenamiento } from "../entities/asignacionEntrenamiento";
 
 // Este servicio usa el backend real
 
@@ -67,5 +68,13 @@ export class BackendService {
 
   deleteSesion(id:number): Observable<void>{
     return this.httpClient.delete<void>(BACKEND_URI + '/sesion/' + id);
+  }
+
+  getEntrenaE(idEntrenador:number): Observable<AsignacionEntrenamiento[]>{
+    return this.httpClient.get<AsignacionEntrenamiento[]>(BACKEND_URI + '/entrena?entrenador=' + idEntrenador);
+  }
+
+  getEntrenaC(idCliente:number): Observable<AsignacionEntrenamiento[]>{
+    return this.httpClient.get<AsignacionEntrenamiento[]>(BACKEND_URI + '/entrena?cliente=' + idCliente);
   }
 }
