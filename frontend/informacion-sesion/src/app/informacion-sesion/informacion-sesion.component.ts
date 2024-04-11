@@ -74,6 +74,20 @@ export class InformacionSesion implements OnInit {
     }, (reason) => {});
 
   }
+  siguientePlan(): void{
+    if (this.planSeleccionado) {
+      const indiceActual = this.planes.findIndex(plan => plan.id === this.planSeleccionado!.id);
+      const sigIndice = (indiceActual + 1) % this.planes.length;
+      this.planSeleccionado = this.planes[sigIndice];
+    }
+  }
+  anteriorPlan(): void{
+    if (this.planSeleccionado) {
+      const indiceActual = this.planes.findIndex(plan => plan.id === this.planSeleccionado!.id);
+      const indiceAnt = (indiceActual - 1) % this.planes.length;
+      this.planSeleccionado = this.planes[indiceAnt];
+    }
+  }
   sesionEditada(sesion: Sesion): void {
     this.sesionesService.editarSesion(sesion).subscribe(() => {
       this.actualizarSesiones();
