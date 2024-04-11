@@ -11,6 +11,10 @@
         <br>
         <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()">Añadir Sesion</button>
       </div>
+      <div class="btn-group" role="group" aria-label="Botones planes">
+      <button type="button" class="btn btn-outline-primary btn-sm bi bi-arrow-left" (click)="anteriorPlan()">Anterior plan</button>
+      <button type="button" class="btn btn-outline-primary btn-sm bi bi-arrow-right" (click)="siguientePlan()">Siguiente plan</button>
+      </div>
       <div class="col-md-6" *ngIf="sesionElegida">
         <app-detalle-sesion [sesion]="sesionElegida"
           (sesionEditada)="sesionEditada($event)"
