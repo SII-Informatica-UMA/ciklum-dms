@@ -1,32 +1,41 @@
 <div class="container">
     <div class="row">
-      @if(planes.length > 0){
-        <div class="col-md-6">
-        <h1>Lista de sesiones</h1>
-        <div class="list-group">
-          <button *ngFor="let sesion of sesiones"
-            class="list-group-item list-group-item-action"
-            (click)="elegirSesion(sesion)"
-            [class.active]="sesion === sesionElegida">{{sesion.trabajoRealizado}}</button>
+      @if (isCliente() || isEntrenador()) {
+        @if(planes.length > 0){
+          <div class="col-md-6">
+          <h1>Lista de sesiones</h1>
+          <h2>Plan {{planes[indice].id}}</h2>
+          <div class="list-group">
+            <button *ngFor="let sesion of sesiones"
+              class="list-group-item list-group-item-action"
+              (click)="elegirSesion(sesion)"
+              [class.active]="sesion === sesionElegida">{{sesion.trabajoRealizado}}</button>
+          </div>
+          <br>
+          <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()" [disabled]="isEntrenador()">Añadir Sesion</button>
+          <br>
+          <br>
+          <div class="btn-group" role="group" aria-label="Botones planes">
+            <button type="button" class="btn btn-outline-primary btn-sm bi bi-arrow-left" (click)="anteriorPlan()" [disabled]="indice == 0">Anterior plan</button>
+            <button type="button" class="btn btn-outline-primary btn-sm bi bi-arrow-right" (click)="siguientePlan()" [disabled]="indice == planes.length-1">Siguiente plan</button>
+            </div>
         </div>
-        <br>
-        <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()">Añadir Sesion</button>
-      </div>
-      <div class="btn-group" role="group" aria-label="Botones planes">
-      <button type="button" class="btn btn-outline-primary btn-sm bi bi-arrow-left" (click)="anteriorPlan()">Anterior plan</button>
-      <button type="button" class="btn btn-outline-primary btn-sm bi bi-arrow-right" (click)="siguientePlan()">Siguiente plan</button>
-      </div>
-      <div class="col-md-6" *ngIf="sesionElegida">
-        <app-detalle-sesion [sesion]="sesionElegida"
-          (sesionEditada)="sesionEditada($event)"
-          (sesionEliminada)="eliminarSesion($event)"
-          ></app-detalle-sesion>
-      </div>
+        <div class="col-md-6" *ngIf="sesionElegida">
+          <app-detalle-sesion [sesion]="sesionElegida"
+            (sesionEditada)="sesionEditada($event)"
+            (sesionEliminada)="eliminarSesion($event)"
+            ></app-detalle-sesion>
+        </div>
+        }
+        @else {
+          <p class="alert alert-danger">No tienes asociado ningún plan.</p>
+        }
       }
       @else {
-        <p class="alert alert-danger">No tienes asociado ningún plan.</p>
+        <div class="col-12">
+          <p class="alert alert-danger">Solo los clientes y los entrenadores pueden acceder a las sesiones.</p>
+        </div>
       }
-      
     </div>
   </div>
   

@@ -7,6 +7,7 @@ import { Usuario, UsuarioImpl } from '../entities/usuario';
 import { Rol } from '../entities/login';
 import { FormularioUsuarioComponent } from '../formulario-usuario/formulario-usuario.component';
 
+
 @Component({
   selector: 'app-listado-usuario',
   standalone: true,
@@ -21,7 +22,7 @@ export class ListadoUsuarioComponent {
     this.actualizarUsuarios();
    }
 
-  private get rol() {
+  public get rol() {
     return this.usuariosService.rolCentro;
   }
 

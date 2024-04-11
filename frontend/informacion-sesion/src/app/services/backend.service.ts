@@ -6,6 +6,9 @@ import { BACKEND_URI } from "../config/config";
 import { JwtResponse } from "../entities/login";
 import { Sesion } from "../entities/sesion";
 import { AsignacionEntrenamiento } from "../entities/asignacionEntrenamiento";
+import { Cliente } from "../entities/cliente";
+import { Centro } from "../entities/centro";
+import { Entrenador } from "../entities/entrenador";
 
 // Este servicio usa el backend real
 
@@ -76,5 +79,17 @@ export class BackendService {
 
   getEntrenaC(idCliente:number): Observable<AsignacionEntrenamiento[]>{
     return this.httpClient.get<AsignacionEntrenamiento[]>(BACKEND_URI + '/entrena?cliente=' + idCliente);
+  }
+
+  getCentros(): Observable<Centro[]>{
+    return this.httpClient.get<Centro[]>(BACKEND_URI + '/centro');
+  }
+
+  getClientes(idCentro:number): Observable<Cliente[]> {
+    return this.httpClient.get<Cliente[]>(BACKEND_URI + '/cliente?centro=' + idCentro);
+  }
+
+  getEntrenadores(idCentro:number): Observable<Entrenador[]>{
+    return this.httpClient.get<Entrenador[]>(BACKEND_URI + '/entrenador?centro=' + idCentro);
   }
 }

@@ -4,6 +4,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
 import { SesionesService } from '../services/sesiones.service';
 import { DatePipe } from '@angular/common';
+import { UsuariosService } from '../services/usuarios.service';
+import { Rol } from '../entities/login';
+import { InformacionSesion } from '../informacion-sesion/informacion-sesion.component';
 
 @Component({
   selector: 'app-detalle-sesion',
@@ -17,7 +20,7 @@ export class DetalleSesionComponent {
   @Output() sesionEditada = new EventEmitter<Sesion>();
   @Output() sesionEliminada = new EventEmitter<number>();
 
-  constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
+  constructor(private sesionesService: SesionesService, private usuariosService:UsuariosService, private modalService: NgbModal) { }
 
   editarSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
@@ -30,5 +33,14 @@ export class DetalleSesionComponent {
 
   eliminarSesion(): void {
     this.sesionEliminada.emit(this.sesion?.id);
+  }
+
+  isCliente(): boolean{
+    //return this.usuariosService.rolCentro?.rol == Rol.CLIENTE;
+    return true;
+  }
+
+  isEntrenador(): boolean{
+    return this.usuariosService.rolCentro?.rol == Rol.ENTRENADOR;
   }
 }

@@ -10,8 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Usuario } from '../entities/usuario';
 import { UsuariosService } from '../services/usuarios.service';
 import { Plan } from '../entities/plan';
-import { UsuarioSesion } from '../entities/login';
-import { UnsecuredJWT } from 'jose';
+import { Rol, UsuarioSesion } from '../entities/login';
 
 @Component({
   standalone: true,
@@ -26,14 +25,24 @@ export class InformacionSesion implements OnInit {
   indice: number = 0;
   sesionElegida?: Sesion;
   constructor(private sesionesService: SesionesService, private usuariosService: UsuariosService, private modalService: NgbModal) { 
-    this.actualizarPlanes();
   }
 
   ngOnInit(): void {
+    this.indice = 0;
     this.actualizarPlanes();
   }
 
+  isCliente(): boolean{
+    return this.usuariosService.rolCentro?.rol == Rol.CLIENTE;
+    //return true;
+  }
+
+  isEntrenador(): boolean{
+    return this.usuariosService.rolCentro?.rol == Rol.ENTRENADOR;
+  }
+
   actualizarPlanes(){
+    this.planes = [];
     console.log(this.usuariosService.getUsuarioSesion()?.id);
     let usuario: UsuarioSesion |undefined = this.usuariosService.getUsuarioSesion();
     if(usuario != undefined){
@@ -74,20 +83,6 @@ export class InformacionSesion implements OnInit {
     }, (reason) => {});
 
   }
-  siguientePlan(): void{
-    if (this.planSeleccionado) {
-      const indiceActual = this.planes.findIndex(plan => plan.id === this.planSeleccionado!.id);
-      const sigIndice = (indiceActual + 1) % this.planes.length;
-      this.planSeleccionado = this.planes[sigIndice];
-    }
-  }
-  anteriorPlan(): void{
-    if (this.planSeleccionado) {
-      const indiceActual = this.planes.findIndex(plan => plan.id === this.planSeleccionado!.id);
-      const indiceAnt = (indiceActual - 1) % this.planes.length;
-      this.planSeleccionado = this.planes[indiceAnt];
-    }
-  }
   sesionEditada(sesion: Sesion): void {
     this.sesionesService.editarSesion(sesion).subscribe(() => {
       this.actualizarSesiones();
@@ -102,14 +97,15 @@ export class InformacionSesion implements OnInit {
   }
 
   siguientePlan(){
-    if(this.indice < this.planes.length){
+    if(this.indice+1 < this.planes.length){
+      console.log("Tamaño planes: " + this.planes.length);
       this.indice++;
       this.actualizarSesiones();
     }
   }
 
   anteriorPlan(){
-    if(this.indice > 0){
+    if(this.indice-1 >= 0){
       this.indice--;
       this.actualizarSesiones();
     }

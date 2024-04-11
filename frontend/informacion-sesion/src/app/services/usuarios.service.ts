@@ -7,6 +7,7 @@ import * as jose from 'jose';
 import { Usuario } from "../entities/usuario";
 import { BackendFakeService } from "./backend.fake.service";
 import { BackendService } from "./backend.service";
+import { waitForAsync } from "@angular/core/testing";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class UsuariosService {
         apellido1: obj.usuario.apellido1,
         apellido2: obj.usuario.apellido2,
         email: obj.usuario.email,
-        roles: obj.usuario.administrador?[{rol: Rol.ADMINISTRADOR}]:[],
+        roles: obj.usuario.administrador?[{rol: Rol.ADMINISTRADOR},{rol: Rol.CLIENTE},{rol: Rol.ENTRENADOR}]:[],
         jwt: obj.jwt
       };
     }));
@@ -47,6 +48,25 @@ export class UsuariosService {
 
   private completarConRoles(usuarioSesion: UsuarioSesion): Observable<UsuarioSesion> {
     // TODO: acceder a lo sotros servicios (o simular) para completar con los roles necesarios
+    let nRoles = usuarioSesion.roles;
+    this.backend.getCentros().subscribe(centros =>{
+      centros.forEach(centro => {
+        console.log("Centro: " + centro.nombre);
+        this.backend.getClientes(centro.idCentro).subscribe(clientes => {
+          if(clientes.find(x => x.idUsuario == usuarioSesion.id)){
+            console.log("es Cliente");
+            nRoles.push({rol: Rol.CLIENTE, centro: centro.idCentro, nombreCentro: centro.nombre});
+          }
+            
+        });
+        this.backend.getEntrenadores(centro.idCentro).subscribe(entrenadores => {
+          if(entrenadores.find(x => x.idUsuario == usuarioSesion.id))
+            nRoles.push({rol: Rol.ENTRENADOR, centro: centro.idCentro, nombreCentro: centro.nombre})
+        });
+      })
+      usuarioSesion.roles = nRoles; 
+    });
+    waitForAsync;
     return of(usuarioSesion);
   }
 

@@ -26,7 +26,7 @@
 </span>
 </div>
 <div class="row">
-  <label class="col-md-3" for="id">Descripcion:</label>
+  <label class="col-md-3" for="id">Comentarios:</label>
   <span class="col-md-9 offset-2 offset-md-0">{{sesion?.descripcion}}</span>
 </div>
 <div class="row">
@@ -46,13 +46,9 @@
   <label class="col-md-3" for="id">Tiempo de ejercicio:</label> 
   <span class="col-md-9 offset-2 offset-md-0"> {{sesion?.datosSalud?.at(3)}}</span>
 </div>
-
-
-
-<div class="row">
-  <button class="col-auto btn btn-outline-primary" (click)="eliminarSesion()">Eliminar <i class="bi bi-trash-fill"></i></button>
-  <div class="col-1"></div>
-  <button class="col-auto btn btn-outline-primary" (click)="editarSesion()">Editar <i class="bi bi-pencil-fill"></i></button>
-</div>
-
+  <div class="row">
+    <button class="col-auto btn btn-outline-primary" (click)="eliminarSesion()" [disabled]="isEntrenador()">Eliminar <i class="bi bi-trash-fill"></i></button>
+    <div class="col-1"></div>
+    <button class="col-auto btn btn-outline-primary" (click)="editarSesion()" [disabled]="isEntrenador()">Editar <i class="bi bi-pencil-fill"></i></button>
+  </div>
 </div>
