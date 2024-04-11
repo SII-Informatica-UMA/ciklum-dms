@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Sesion } from '../entities/sesion'
 import { Observable } from 'rxjs';
 import { BackendService } from './backend.service';
+import { Plan } from '../entities/plan';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class SesionesService {
 
   constructor(private backend: BackendService) { }
 
-  getSesiones(): Observable<Sesion []> {
-    return this.backend.getSesiones(0);
+  getSesiones(idPlan: number): Observable<Sesion []> {
+    return this.backend.getSesiones(idPlan);
   }
 
   addSesion(sesion: Sesion): Observable<Sesion> {
@@ -30,5 +31,17 @@ export class SesionesService {
 
   eliminarSesion(id: number): Observable<void> {
     return this.backend.deleteSesion(id);
+  }
+
+  getPlanes(idUsuario: number|undefined): Plan[]{
+    if(idUsuario === undefined)
+      return [];
+    let planes = new Set<Plan>();
+    this.backend.getEntrenaC(idUsuario).subscribe(asignaciones => {
+      asignaciones.map(asig => {
+        asig.planes.map(plan => planes.add(plan))
+      })
+    })
+    return Array.from(planes);
   }
 }

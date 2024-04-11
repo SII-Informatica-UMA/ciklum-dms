@@ -21,19 +21,23 @@ import { Plan } from '../entities/plan';
 export class InformacionSesion implements OnInit {
   sesiones: Sesion [] = [];
   planes: Plan[] = [];
-  planSeleccionado?: Plan = undefined;
+  indice: number = 0;
   sesionElegida?: Sesion;
   constructor(private sesionesService: SesionesService, private usuariosService: UsuariosService, private modalService: NgbModal) { 
-    this.actualizarSesiones();
+    this.actualizarPlanes();
   }
 
   ngOnInit(): void {
     this.actualizarSesiones();
   }
 
+  actualizarPlanes(){
+    this.planes = this.sesionesService.getPlanes(this.usuariosService.getUsuarioSesion()?.id);
+  }
+
   actualizarSesiones() {
-    this.sesionesService.getSesiones().subscribe(sesiones => {
-      this.sesiones = this.sesiones;
+    this.sesionesService.getSesiones(this.planes[this.indice].id).subscribe(sesiones => {
+      this.sesiones = sesiones;
     });
   }
 
