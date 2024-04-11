@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      @if(planes.length > 0){
+        <div class="col-md-6">
         <h1>Lista de sesiones</h1>
         <div class="list-group">
           <button *ngFor="let sesion of sesiones"
@@ -17,6 +18,11 @@
           (sesionEliminada)="eliminarSesion($event)"
           ></app-detalle-sesion>
       </div>
+      }
+      @else {
+        <p class="alert alert-danger">No tienes asociado ningún plan.</p>
+      }
+      
     </div>
   </div>
   

@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { Usuario } from '../entities/usuario';
 import { UsuariosService } from '../services/usuarios.service';
 import { Plan } from '../entities/plan';
+import { UsuarioSesion } from '../entities/login';
+import { UnsecuredJWT } from 'jose';
 
 @Component({
   standalone: true,
@@ -28,17 +30,33 @@ export class InformacionSesion implements OnInit {
   }
 
   ngOnInit(): void {
-    this.actualizarSesiones();
+    this.actualizarPlanes();
   }
 
   actualizarPlanes(){
-    this.planes = this.sesionesService.getPlanes(this.usuariosService.getUsuarioSesion()?.id);
+    console.log(this.usuariosService.getUsuarioSesion()?.id);
+    let usuario: UsuarioSesion |undefined = this.usuariosService.getUsuarioSesion();
+    if(usuario != undefined){
+      this.sesionesService.getAsignaciones(usuario.id).subscribe(asignaciones => {
+        asignaciones.forEach(asig => {
+          console.log("asignacion id cliente " + asig.idCliente);
+          asig.planes.forEach(plan =>{
+            console.log("Plan " + plan.id);
+            this.planes.push(plan);
+          })
+        })
+        this.actualizarSesiones();
+      })
+    }
+        //this.actualizarSesiones();
   }
 
-  actualizarSesiones() {
+  actualizarSesiones(){
+    let plan = this.planes[this.indice]
     this.sesionesService.getSesiones(this.planes[this.indice].id).subscribe(sesiones => {
-      this.sesiones = sesiones;
+    this.sesiones = sesiones;
     });
+    
   }
 
   elegirSesion(sesion: Sesion): void {
@@ -48,7 +66,7 @@ export class InformacionSesion implements OnInit {
   aniadirSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.sesion = {idPlan: 0,trabajoRealizado:"",multimedia:[],descripcion:"",presencial:true,datosSalud:[],id:0};
+    ref.componentInstance.sesion = {idPlan: this.planes[this.indice].id,trabajoRealizado:"",multimedia:[],descripcion:"",presencial:true,datosSalud:[],id:0};
     ref.result.then((sesion: Sesion) => {
       this.sesionesService.addSesion(sesion).subscribe(sesion =>{
         this.actualizarSesiones();
@@ -66,6 +84,21 @@ export class InformacionSesion implements OnInit {
     this.sesionesService.eliminarSesion(id).subscribe(() => {
       this.actualizarSesiones();
     });
+    this.sesionElegida = undefined;
+  }
+
+  siguientePlan(){
+    if(this.indice < this.planes.length){
+      this.indice++;
+      this.actualizarSesiones();
+    }
+  }
+
+  anteriorPlan(){
+    if(this.indice > 0){
+      this.indice--;
+      this.actualizarSesiones();
+    }
   }
 
   

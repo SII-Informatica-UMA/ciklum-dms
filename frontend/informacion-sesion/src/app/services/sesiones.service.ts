@@ -3,6 +3,7 @@ import {Sesion } from '../entities/sesion'
 import { Observable } from 'rxjs';
 import { BackendService } from './backend.service';
 import { Plan } from '../entities/plan';
+import { AsignacionEntrenamiento } from '../entities/asignacionEntrenamiento';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class SesionesService {
   }
 
   addSesion(sesion: Sesion): Observable<Sesion> {
-    sesion.id = Math.max(...this.sesiones.map(c => c.id)) + 1;
+    //sesion.id = Math.max(...this.sesiones.map(c => c.id)) + 1;
     return this.backend.postSesion(sesion);
   }
 
@@ -33,15 +34,24 @@ export class SesionesService {
     return this.backend.deleteSesion(id);
   }
 
+  getAsignaciones(idUsuario: number): Observable<AsignacionEntrenamiento[]>{
+    return this.backend.getEntrenaC(idUsuario);
+  }
+
   getPlanes(idUsuario: number|undefined): Plan[]{
     if(idUsuario === undefined)
       return [];
-    let planes = new Set<Plan>();
+    let planes: Plan[] = [];
     this.backend.getEntrenaC(idUsuario).subscribe(asignaciones => {
-      asignaciones.map(asig => {
-        asig.planes.map(plan => planes.add(plan))
+      asignaciones.forEach(asig => {
+        console.log("asignacion id cliente " + asig.idCliente);
+        asig.planes.forEach(plan =>{
+          console.log("Plan " + plan.id);
+          planes.push(plan);
+        })
       })
+      
     })
-    return Array.from(planes);
+    return planes;
   }
 }
