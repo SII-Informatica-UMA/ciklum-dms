@@ -3,6 +3,8 @@ package es.uma.informatica.sii.spring.jpa.demo.entities;
 import java.sql.Date;
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,10 +20,14 @@ public class Sesion {
 	private Date fin;
 	private String trabajoRealizado;
 	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "MULTIMEDIA")
+	@Column(name = "valor")
 	private List<String> multimedia;
 	private String descripcion;
 	private Boolean presencial;
 	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "DATOSALUD")
+	@Column(name = "dato")
 	private List<String> datosSalud;
 	private Long idPlan;
 	

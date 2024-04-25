@@ -66,7 +66,7 @@ export class UsuariosService {
       })
       usuarioSesion.roles = nRoles; 
     });
-    waitForAsync;
+  
     return of(usuarioSesion);
   }
 
