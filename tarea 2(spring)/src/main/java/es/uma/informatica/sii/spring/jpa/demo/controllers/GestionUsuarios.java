@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@RestC
+@Rest
 @RequestMapping("/sesion")
 @CrossOrigin()
 @Tag(name="Gestión de usuarios", description="Operaciones para la gestión de usuarios")
