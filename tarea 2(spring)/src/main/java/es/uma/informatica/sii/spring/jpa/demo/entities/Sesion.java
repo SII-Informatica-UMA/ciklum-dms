@@ -10,9 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Builder;
 
 
 @Entity
+@Builder
 public class Sesion {
 	@Id @GeneratedValue
 	private Long id;
