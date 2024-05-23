@@ -1,5 +1,12 @@
 package es.uma.informatica.sii.spring.jpa.demo.controllers;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin()
@@ -12,5 +19,27 @@ public class GestionSesion {
     }
 
     @GetMapping()
-    public List<Sesion>
+    public ResponseEntity<List<SesionDTO>> obtenerSesiones(@RequestParam(value = "plan") int plan){
+
+    }
+
+    @PostMapping()
+    public ResponseEntity<SesionDTO> crearSesion (@RequestBody SesionNuevaDTO sesionDTO){
+
+    }
+
+    @GetMapping("/{idSesion}")
+    public ResponseEntity<SesionDTO> getSesion (@PathVariable Long idSesion){
+
+    }
+
+    @PutMapping("/{idSesion}")
+    public ResponseEntity<SesionDTO> actualizaSesion (@PathVariable Long idSesion,@RequestBody SesionDTO sesionDTO){
+        
+    }
+
+    @DeleteMapping("/{idSesion}")
+    public ResponseEntity<SesionDTO> borraSesion (@PathVariable Long idSesion){
+        
+    }
 }
