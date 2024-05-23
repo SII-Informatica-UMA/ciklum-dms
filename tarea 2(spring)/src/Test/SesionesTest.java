@@ -136,5 +136,100 @@ public class SesionesTest {
             });
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
         }
+        @Test
+        @DisplayName("devuelve la sesion vacía")
+        public void get_Sesion(){
+            var peticion = get("http", "localhost", port, "/sesion/1");
+
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<Sesion>() {
+                });
+                assertThat(respuesta.getStatusCode().value()).isEqualTo(404);                
+        }
+        @Test
+        @DisplayName("put sesion vacía")
+        public void put_sesion(){
+            var sesion = SesionDTO.builder().nombre("Sesion1").build();
+            var peticion = put("http", "localhost", port, "/sesion/1",sesion);
+            var respuesta = restTemplate.exchange(peticion,
+                Void.class );
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+        @Test
+        @DisplayName("elimina el sesion vacía")
+        public void delete_sesion(){
+            var peticion = delete("http", "localhost", port, "/sesion/1");
+
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<Sesion>() {
+                });
+                assertThat(respuesta.getStatusCode().value()).isEqualTo(404);                
+        }
+    }
+    @Nested
+    @DisplayName("cuando hay datos")
+    public class SesionDatos{
+        @BeforeEach
+        public void insertarDatos(){
+            var sesion = new Sesion();
+            grupo.setId(Long.valueOf(1));
+            grupo.setNombre("Grupo 1");
+            grupoRepository.save(grupo);
+            var grupo2 = new Grupo();
+            grupo2.setId(Long.valueOf(2));
+            grupo2.setNombre("Grupo 2");
+            grupoRepository.save(grupo2);
+            
+        }
+        @Test
+        @DisplayName("devuelve sesion")
+        public void get_Sesion(){
+            var peticion = get("http", "localhost", port, "/sesion/1");
+
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<Sesion>() {
+                });
+                assertThat(respuesta.getStatusCode().value()).isEqualTo(200);                
+        }
+        @Test
+        @DisplayName("put sesion ")
+        public void put_sesion(){
+            var sesion = SesionDTO.builder();
+            var peticion = put("http", "localhost", port, "/sesion/1",sesion);
+            var respuesta = restTemplate.exchange(peticion,
+                Void.class );
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+
+        @Test
+        @DisplayName("elimina la sesion")
+        public void delete_sesion(){
+            var peticion = delete("http", "localhost", port, "/sesion/1");
+
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<Sesion>() {
+                });
+                assertThat(respuesta.getStatusCode().value()).isEqualTo(200);                
+        }
+        @Test
+        @DisplayName("Devuelve la sesion")
+        public void getSesionPlan(){
+            int plan = 1;
+            var peticion = getParam("http", "localhost", port, "/sesion", plan);
+            var respuesta = restTemplate.exchange(peticion, 
+            new ParameterizedTypeReference<Set<Sesion>>() {
+            });
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+        @Test
+        @DisplayName("Devuelve 200 cuando añade una sesion a un plan especifico")
+        public void postSesionPlan(){
+            int plan = 1;
+            var peticion = postParam("http", "localhost", port, "/sesion", plan);
+            var respuesta = restTemplate.exchange(peticion, 
+            new ParameterizedTypeReference<Set<Sesion>>() {
+            });
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
+        }
     }
 }
