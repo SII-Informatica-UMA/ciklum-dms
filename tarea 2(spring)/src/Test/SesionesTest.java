@@ -32,7 +32,7 @@ public class SesionesTest {
 
     @Value(value = "${local.server.port}")
     private int port;
-
+    private String token;
 
     @BeforeEach
     public void initializeDatabase() {
@@ -63,25 +63,29 @@ public class SesionesTest {
         URI uri = uri(scheme, host, port, path);
         var peticion = RequestEntity.get(uri)
             .accept(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Bearer "+token)
             .build();
         return peticion;
     }
     private RequestEntity<Void> getParam(String scheme, String host, int port, String path, int plan) {
         URI uri = uriParam(scheme, host, port, path,"idSesion",plan);
         var peticion = RequestEntity.get(uri)
-            .contentType(MediaType.APPLICATION_JSON);
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Bearer "+token);
         return peticion.build();
     }
 
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
         var peticion = RequestEntity.delete(uri)
+            .header("Authorization", "Bearer "+token)
             .build();
         return peticion;
     }
     private RequestEntity<Void> deleteParam(String scheme, String host, int port, String path,int plan) {
         URI uri = uriParam(scheme, host, port, path,"idSesion",plan);
         var peticion = RequestEntity.delete(uri)
+            .header("Authorization", "Bearer "+token)
             .build();
         return peticion;
     }
@@ -90,13 +94,15 @@ public class SesionesTest {
         URI uri = uri(scheme, host, port, path);
         var peticion = RequestEntity.post(uri)
             .contentType(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Bearer "+token)
             .body(object);
         return peticion;
     }
     private RequestEntity<Void> postParam(String scheme, String host, int port, String path, int plan) {
         URI uri = uriParam(scheme, host, port, path,"idSesion",plan);
         var peticion = RequestEntity.post(uri)
-            .contentType(MediaType.APPLICATION_JSON);
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Bearer "+token);
         return peticion.build();
     }
 
@@ -104,13 +110,15 @@ public class SesionesTest {
         URI uri = uri(scheme, host, port, path);
         var peticion = RequestEntity.put(uri)
             .contentType(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Bearer "+token)
             .body(object);
         return peticion;
     }
     private RequestEntity<Void> putParam(String scheme, String host, int port, String path, int plan) {
         URI uri = uriParam(scheme, host, port, path,"idSesion",plan);
         var peticion = RequestEntity.put(uri)
-            .contentType(MediaType.APPLICATION_JSON);
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Authorization", "Bearer "+token);
         return peticion.build();
     }
     @Nested
@@ -200,6 +208,24 @@ public class SesionesTest {
                 Void.class );
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
+        @Test
+        @DisplayName("put sesion ")
+        public void put_sesion403(){
+            var sesion = SesionDTO.builder();
+            var peticion = put("http", "localhost", port, "/sesion/1",sesion);
+            var respuesta = restTemplate.exchange(peticion,
+                Void.class );
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
+        }
+        @Test
+        @DisplayName("put sesion ")
+        public void put_sesion401(){
+            var sesion = SesionDTO.builder();
+            var peticion = put("http", "localhost", port, "/sesion/1",sesion);
+            var respuesta = restTemplate.exchange(peticion,
+                Void.class );
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(401);
+        }
 
         @Test
         @DisplayName("elimina la sesion")
@@ -210,6 +236,26 @@ public class SesionesTest {
                 new ParameterizedTypeReference<Sesion>() {
                 });
                 assertThat(respuesta.getStatusCode().value()).isEqualTo(200);                
+        }
+        @Test
+        @DisplayName("elimina la sesión")
+        public void deleteSesion403() {
+            // Realizar la solicitud DELETE sin credenciales de autenticación
+            ResponseEntity<Sesion> response = restTemplate.exchange("http://localhost:" + port + "/sesion/1",
+                    HttpMethod.DELETE, null, Sesion.class);
+
+            // Verificar el código de estado de la respuesta
+            assertThat(response.getStatusCode().value()).isEqualTo(403);
+        }
+        @Test
+        @DisplayName("elimina la sesión")
+        public void deleteSesion401() {
+            // Realizar la solicitud DELETE sin credenciales de autenticación
+            ResponseEntity<Sesion> response = restTemplate.exchange("http://localhost:" + port + "/sesion/1",
+                    HttpMethod.DELETE, null, Sesion.class);
+
+            // Verificar el código de estado de la respuesta
+            assertThat(response.getStatusCode().value()).isEqualTo(401);
         }
         @Test
         @DisplayName("Devuelve la sesion")
