@@ -9,14 +9,20 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sesion {
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
 	private Date inicio;
 	private Date fin;
@@ -33,6 +39,17 @@ public class Sesion {
 	private List<String> datosSalud;
 	private Long idPlan;
 	
+	/*public Sesion(Date nInicio, Date nFin, String t, List<String> m, String d, Boolean p, List<String> ds, Long idP){
+		super();
+		this.inicio = nInicio ;
+		this.fin = nFin ;
+		this.trabajoRealizado = t ;
+		this.multimedia = m;
+		this.descripcion = d;
+		this.presencial = p;
+		this.datosSalud = ds;
+		this.idPlan = idP;
+	}*/
 	
 	public Long getId() {
 		return id;

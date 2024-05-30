@@ -21,6 +21,8 @@ import es.uma.informatica.sii.spring.jpa.demo.dtos.SesionDTO;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.SesionNuevaDTO;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Sesion;
 import es.uma.informatica.sii.spring.jpa.demo.exceptions.SesionInexistente;
+import es.uma.informatica.sii.spring.jpa.demo.exceptions.SesionRepetidaException;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @RestController
@@ -48,12 +50,13 @@ public class GestionSesion {
     }
 
     @PostMapping()
-    public ResponseEntity<SesionDTO> crearSesion (@RequestBody SesionNuevaDTO sesionDTO,UriComponentsBuilder uriBuilder){
+    public ResponseEntity<SesionDTO> crearSesion (@RequestBody SesionNuevaDTO sesionDTO,@RequestParam(value = "plan") Long plan,UriComponentsBuilder uriBuilder){
         try{
             Sesion sesion = sesionDTO.toEntity();
+            sesion.setIdPlan(plan);
             sesionService.aniadirSesion(sesion);
             return ResponseEntity.created(uriBuilder.path("/sesion/" + sesion.getId()).build().toUri()).build();
-        } catch(RuntimeException e){
+        } catch(SesionRepetidaException e){
             return ResponseEntity.notFound().build();
         }
     }

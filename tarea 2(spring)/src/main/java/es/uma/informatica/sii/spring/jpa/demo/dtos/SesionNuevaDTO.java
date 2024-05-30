@@ -22,6 +22,7 @@ public class SesionNuevaDTO {
 	private Long idPlan;
 
 	public Sesion toEntity() {
+		//Sesion s = new Sesion(inicio,fin,trabajoRealizado,multimedia,descripcion,presencial,datosSalud,idPlan);
 		return Sesion.builder()
 				.inicio(this.inicio)
 				.fin(this.fin)

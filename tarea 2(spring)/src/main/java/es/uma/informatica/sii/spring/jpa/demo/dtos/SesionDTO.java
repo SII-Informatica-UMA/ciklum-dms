@@ -34,7 +34,7 @@ public class SesionDTO extends SesionNuevaDTO {
 				.build();
 	}
 
-	public Sesion toEntity() {
+	/* public Sesion toEntity() {
 		return Sesion.builder()
 				.id(getId())
 				.inicio(getInicio())
@@ -46,5 +46,6 @@ public class SesionDTO extends SesionNuevaDTO {
 				.datosSalud(getDatosSalud())
 				.build();
 	}
+	*/
 }
  

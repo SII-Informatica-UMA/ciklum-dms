@@ -9,9 +9,11 @@ import es.uma.informatica.sii.spring.jpa.demo.security.JwtUtil;
 import jakarta.transaction.Transactional;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.sql.Timestamp;
@@ -30,6 +32,9 @@ public class SesionService {
 
     private final JwtUtil jwtUtil;
     private final Logger log =Logger.getLogger(SesionService.class.getName());
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public SesionService(SesionRepository sesionRepo, JwtUtil jw){
         this.jwtUtil=jw;
@@ -83,13 +88,9 @@ public class SesionService {
 	}
 
     public void aniadirSesion(Sesion sesion){
-		if (sesionRepo.existsById(sesion.getId())) {
-			throw new SesionRepetidaException();
-		} else {
-			sesionRepo.save(sesion);
-		}
+		sesionRepo.save(sesion);
 	}
-	
+
     public void actualizarSesion(Sesion sesion){
         if(!sesionRepo.existsById(sesion.getId())){
             throw new SesionInexistente();
