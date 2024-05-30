@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Application.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\exceptions\SesionInexistente.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\repositories\SesionRepository.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\JwtRequestFilter.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\JwtUtil.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\services\SesionService.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Sesion.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\controllers\GestionSesion.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\SesionNuevaDTO.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\LineaComandos.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\SecurityConfguration.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\SesionDTO.java
+C:\Users\34652\Documents\SII INTERNET\TRABAJO EN GRUPO\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\exceptions\SesionRepetidaException.java
+=======
 C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\LineaComandos.java
 C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Application.java
 C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\repositories\SesionRepository.java
@@ -8,3 +23,4 @@ C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\
 C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Sesion.java
 C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\controllers\GestionSesion.java
 C:\Users\santi\Desktop\SII\Trabajo_en_grupo\ciklum-dms\tarea 2(spring)\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\SesionNuevaDTO.java
+>>>>>>> 9bf0f8fc674ca0a644fb4fe2d646b4f08cad2557

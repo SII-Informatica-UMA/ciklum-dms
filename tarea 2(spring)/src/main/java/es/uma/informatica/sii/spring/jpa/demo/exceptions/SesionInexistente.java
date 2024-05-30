@@ -1,12 +1,8 @@
+package es.uma.informatica.sii.spring.jpa.demo.exceptions;
 
-public class SesionInexistente {
-    public SesionInexistente(Sesion sesion) {
-        this(sesion.getId());
-    }
+import es.uma.informatica.sii.spring.jpa.demo.entities.Sesion;
 
-    public SesionInexistente(Long id) {
-        super("La sesion con ID " +id + " no existe");
-    }
+public class SesionInexistente extends RuntimeException{
 
     public SesionInexistente() {
         super();
