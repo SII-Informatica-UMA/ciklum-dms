@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.25 s -- in es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos.put_sesionError -- Time elapsed: 1.849 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos.postSesionPlan -- Time elapsed: 0.367 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos.delete_sesion -- Time elapsed: 0.317 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos.get_Sesion -- Time elapsed: 0.316 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos.put_sesion -- Time elapsed: 0.379 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionDatos.getSesionPlan -- Time elapsed: 0.317 s

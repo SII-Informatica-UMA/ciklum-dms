@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sesion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring.jpa.demo</a> &gt; <a href="index.source.html" class="el_package">es.uma.informatica.sii.spring.jpa.demo.entities</a> &gt; <span class="el_source">Sesion.java</span></div><h1>Sesion.java</h1><pre class="source lang-java linenums">package es.uma.informatica.sii.spring.jpa.demo.entities;
+
+import java.sql.Date;
+import java.util.List;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+
+
+<span class="pc" id="L20">@Builder</span>
+<span class="fc" id="L21">@AllArgsConstructor</span>
+<span class="fc" id="L22">@NoArgsConstructor</span>
+@Entity
+public class Sesion {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private Date inicio;
+	private Date fin;
+	private String trabajoRealizado;
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = &quot;MULTIMEDIA&quot;)
+	@Column(name = &quot;valor&quot;)
+	private List&lt;String&gt; multimedia;
+	private String descripcion;
+	private Boolean presencial;
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = &quot;DATOSALUD&quot;)
+	@Column(name = &quot;dato&quot;)
+	private List&lt;String&gt; datosSalud;
+	private Long idPlan;
+	
+	/*public Sesion(Date nInicio, Date nFin, String t, List&lt;String&gt; m, String d, Boolean p, List&lt;String&gt; ds, Long idP){
+		super();
+		this.inicio = nInicio ;
+		this.fin = nFin ;
+		this.trabajoRealizado = t ;
+		this.multimedia = m;
+		this.descripcion = d;
+		this.presencial = p;
+		this.datosSalud = ds;
+		this.idPlan = idP;
+	}*/
+	
+	public Long getId() {
+<span class="fc" id="L56">		return id;</span>
+	}
+	public void setId(Long id) {
+<span class="fc" id="L59">		this.id = id;</span>
+<span class="fc" id="L60">	}</span>
+	public Date getInicio() {
+<span class="fc" id="L62">		return inicio;</span>
+	}
+	public void setInicio(Date inicio) {
+<span class="fc" id="L65">		this.inicio = inicio;</span>
+<span class="fc" id="L66">	}</span>
+	public Date getFin() {
+<span class="fc" id="L68">		return fin;</span>
+	}
+	public void setFin(Date fin) {
+<span class="fc" id="L71">		this.fin = fin;</span>
+<span class="fc" id="L72">	}</span>
+	public String getTrabajoRealizado() {
+<span class="fc" id="L74">		return trabajoRealizado;</span>
+	}
+	public void setTrabajoRealizado(String trabajoRealizado) {
+<span class="fc" id="L77">		this.trabajoRealizado = trabajoRealizado;</span>
+<span class="fc" id="L78">	}</span>
+	public List&lt;String&gt; getMultimedia() {
+<span class="fc" id="L80">		return multimedia;</span>
+	}
+	public void setMultimedia(List&lt;String&gt; multimedia) {
+<span class="fc" id="L83">		this.multimedia = multimedia;</span>
+<span class="fc" id="L84">	}</span>
+	public String getDescripcion() {
+<span class="fc" id="L86">		return descripcion;</span>
+	}
+	public void setDescripcion(String descripcion) {
+<span class="fc" id="L89">		this.descripcion = descripcion;</span>
+<span class="fc" id="L90">	}</span>
+	public Boolean getPresencial() {
+<span class="fc" id="L92">		return presencial;</span>
+	}
+	public void setPresencial(Boolean presencial) {
+<span class="fc" id="L95">		this.presencial = presencial;</span>
+<span class="fc" id="L96">	}</span>
+	public List&lt;String&gt; getDatosSalud() {
+<span class="fc" id="L98">		return datosSalud;</span>
+	}
+	public void setDatosSalud(List&lt;String&gt; datosSalud) {
+<span class="fc" id="L101">		this.datosSalud = datosSalud;</span>
+<span class="fc" id="L102">	}</span>
+	public Long getIdPlan() {
+<span class="fc" id="L104">		return idPlan;</span>
+	}
+	public void setIdPlan(Long idPlan) {
+<span class="fc" id="L107">		this.idPlan = idPlan;</span>
+<span class="fc" id="L108">	}</span>
+	@Override
+	public int hashCode() {
+<span class="fc" id="L111">		final int prime = 31;</span>
+<span class="fc" id="L112">		int result = 1;</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">		result = prime * result + ((id == null) ? 0 : id.hashCode());</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		result = prime * result + ((fin == null) ? 0 : fin.hashCode());</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">		result = prime * result + ((trabajoRealizado == null) ? 0 : trabajoRealizado.hashCode());</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">		result = prime * result + ((multimedia == null) ? 0 : multimedia.hashCode());</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">		result = prime * result + ((presencial == null) ? 0 : presencial.hashCode());</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">		result = prime * result + ((datosSalud == null) ? 0 : datosSalud.hashCode());</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">		result = prime * result + ((idPlan == null) ? 0 : idPlan.hashCode());</span>
+<span class="fc" id="L122">		return result;</span>
+	}
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L127">			return true;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L129">			return false;</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L131">			return false;</span>
+<span class="nc" id="L132">		Sesion other = (Sesion) obj;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">		if (id == null) {</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">			if (other.id != null)</span>
+<span class="nc" id="L135">				return false;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">		} else if (!id.equals(other.id))</span>
+<span class="nc" id="L137">			return false;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		if (inicio == null) {</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">			if (other.inicio != null)</span>
+<span class="nc" id="L140">				return false;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">		} else if (!inicio.equals(other.inicio))</span>
+<span class="nc" id="L142">			return false;</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">		if (fin == null) {</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			if (other.fin != null)</span>
+<span class="nc" id="L145">				return false;</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		} else if (!fin.equals(other.fin))</span>
+<span class="nc" id="L147">			return false;</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		if (trabajoRealizado == null) {</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">			if (other.trabajoRealizado != null)</span>
+<span class="nc" id="L150">				return false;</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		} else if (!trabajoRealizado.equals(other.trabajoRealizado))</span>
+<span class="nc" id="L152">			return false;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">		if (multimedia == null) {</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">			if (other.multimedia != null)</span>
+<span class="nc" id="L155">				return false;</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">		} else if (!multimedia.equals(other.multimedia))</span>
+<span class="nc" id="L157">			return false;</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">		if (descripcion == null) {</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">			if (other.descripcion != null)</span>
+<span class="nc" id="L160">				return false;</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">		} else if (!descripcion.equals(other.descripcion))</span>
+<span class="nc" id="L162">			return false;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">		if (presencial == null) {</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">			if (other.presencial != null)</span>
+<span class="nc" id="L165">				return false;</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">		} else if (!presencial.equals(other.presencial))</span>
+<span class="nc" id="L167">			return false;</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">		if (datosSalud == null) {</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">			if (other.datosSalud != null)</span>
+<span class="nc" id="L170">				return false;</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">		} else if (!datosSalud.equals(other.datosSalud))</span>
+<span class="nc" id="L172">			return false;</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">		if (idPlan == null) {</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">			if (other.idPlan != null)</span>
+<span class="nc" id="L175">				return false;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">		} else if (!idPlan.equals(other.idPlan))</span>
+<span class="nc" id="L177">			return false;</span>
+<span class="nc" id="L178">		return true;</span>
+	}
+	@Override
+	public String toString() {
+<span class="nc" id="L182">		return &quot;Sesion [id=&quot; + id + &quot;, inicio=&quot; + inicio + &quot;, fin=&quot; + fin + &quot;, trabajoRealizado=&quot; + trabajoRealizado</span>
+				+ &quot;, multimedia=&quot; + multimedia + &quot;, descripcion=&quot; + descripcion + &quot;, presencial=&quot; + presencial
+				+ &quot;, datosSalud=&quot; + datosSalud + &quot;, idPlan=&quot; + idPlan + &quot;]&quot;;
+	}
+	
+
+
+	
+	
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.292 s -- in es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia.postSesionPlan -- Time elapsed: 0.293 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia.delete_sesion -- Time elapsed: 0.275 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia.get_Sesion -- Time elapsed: 0.270 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia.put_sesion -- Time elapsed: 0.268 s
+es.uma.informatica.sii.spring.jpa.demo.SesionesTest$SesionVacia.getSesionPlan -- Time elapsed: 0.259 s
