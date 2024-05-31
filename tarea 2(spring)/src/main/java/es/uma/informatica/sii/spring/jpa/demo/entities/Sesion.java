@@ -16,13 +16,14 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 
-@Entity
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Sesion {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Date inicio;
 	private Date fin;

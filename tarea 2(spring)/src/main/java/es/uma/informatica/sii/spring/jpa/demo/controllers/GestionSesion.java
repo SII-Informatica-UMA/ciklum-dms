@@ -20,6 +20,7 @@ import es.uma.informatica.sii.spring.jpa.demo.services.SesionService;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.SesionDTO;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.SesionNuevaDTO;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Sesion;
+import es.uma.informatica.sii.spring.jpa.demo.exceptions.PlanInexistente;
 import es.uma.informatica.sii.spring.jpa.demo.exceptions.SesionInexistente;
 import es.uma.informatica.sii.spring.jpa.demo.exceptions.SesionRepetidaException;
 
@@ -44,7 +45,7 @@ public class GestionSesion {
                 lista.add(SesionDTO.fromEntity(s));
             }
             return ResponseEntity.ok(lista);
-        }catch(SesionInexistente e){
+        }catch(PlanInexistente e){
             return ResponseEntity.notFound().build();
         }
     }
@@ -56,7 +57,7 @@ public class GestionSesion {
             sesion.setIdPlan(plan);
             sesionService.aniadirSesion(sesion);
             return ResponseEntity.created(uriBuilder.path("/sesion/" + sesion.getId()).build().toUri()).build();
-        } catch(SesionRepetidaException e){
+        } catch(PlanInexistente e){
             return ResponseEntity.notFound().build();
         }
     }
@@ -80,6 +81,8 @@ public class GestionSesion {
             sesionService.actualizarSesion(sesion);
             return ResponseEntity.ok(SesionDTO.fromEntity(sesion));
         }catch(SesionInexistente e){
+            return ResponseEntity.notFound().build();
+        }catch(PlanInexistente e){
             return ResponseEntity.notFound().build();
         }
     }

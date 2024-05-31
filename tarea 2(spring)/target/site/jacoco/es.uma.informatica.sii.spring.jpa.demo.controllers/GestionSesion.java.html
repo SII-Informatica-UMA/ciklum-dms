@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestionSesion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring.jpa.demo</a> &gt; <a href="index.source.html" class="el_package">es.uma.informatica.sii.spring.jpa.demo.controllers</a> &gt; <span class="el_source">GestionSesion.java</span></div><h1>GestionSesion.java</h1><pre class="source lang-java linenums">package es.uma.informatica.sii.spring.jpa.demo.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import es.uma.informatica.sii.spring.jpa.demo.services.SesionService;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.SesionDTO;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.SesionNuevaDTO;
+import es.uma.informatica.sii.spring.jpa.demo.entities.Sesion;
+import es.uma.informatica.sii.spring.jpa.demo.exceptions.PlanInexistente;
+import es.uma.informatica.sii.spring.jpa.demo.exceptions.SesionInexistente;
+import es.uma.informatica.sii.spring.jpa.demo.exceptions.SesionRepetidaException;
+
+import org.springframework.transaction.annotation.Transactional;
+
+@RestController
+@RequestMapping(&quot;/sesion&quot;)
+@CrossOrigin()
+public class GestionSesion {
+    private final SesionService sesionService;
+
+<span class="fc" id="L35">    public GestionSesion(SesionService sesionService){</span>
+<span class="fc" id="L36">        this.sesionService = sesionService;</span>
+<span class="fc" id="L37">    }</span>
+
+    @GetMapping()
+    public ResponseEntity&lt;List&lt;SesionDTO&gt;&gt; obtenerSesiones(@RequestParam(value = &quot;plan&quot;) Long plan){
+        try{
+            
+<span class="fc" id="L43">            List&lt;SesionDTO&gt; lista = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for(Sesion s : sesionService.findByIdPlan(plan)){</span>
+<span class="fc" id="L45">                lista.add(SesionDTO.fromEntity(s));</span>
+<span class="fc" id="L46">            }</span>
+<span class="fc" id="L47">            return ResponseEntity.ok(lista);</span>
+<span class="fc" id="L48">        }catch(PlanInexistente e){</span>
+<span class="fc" id="L49">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+
+    @PostMapping()
+    public ResponseEntity&lt;SesionDTO&gt; crearSesion (@RequestBody SesionNuevaDTO sesionDTO,@RequestParam(value = &quot;plan&quot;) Long plan,UriComponentsBuilder uriBuilder){
+        try{
+<span class="fc" id="L56">            Sesion sesion = sesionDTO.toEntity();</span>
+<span class="fc" id="L57">            sesion.setIdPlan(plan);</span>
+<span class="fc" id="L58">            sesionService.aniadirSesion(sesion);</span>
+<span class="fc" id="L59">            return ResponseEntity.created(uriBuilder.path(&quot;/sesion/&quot; + sesion.getId()).build().toUri()).build();</span>
+<span class="fc" id="L60">        } catch(PlanInexistente e){</span>
+<span class="fc" id="L61">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+
+    @GetMapping(&quot;/{idSesion}&quot;)
+    public ResponseEntity&lt;SesionDTO&gt; getSesion (@PathVariable Long idSesion){
+        try{
+<span class="fc" id="L68">            Sesion sesion = sesionService.obtenerSesion(idSesion);</span>
+<span class="fc" id="L69">            return ResponseEntity.ok(SesionDTO.fromEntity(sesion));</span>
+<span class="fc" id="L70">        }catch(SesionInexistente e){</span>
+<span class="fc" id="L71">            return ResponseEntity.notFound().build();</span>
+        }
+
+    }
+
+    @PutMapping(&quot;/{idSesion}&quot;)
+    public ResponseEntity&lt;SesionDTO&gt; actualizaSesion (@PathVariable Long idSesion,@RequestBody SesionDTO sesionDTO){
+        try{
+<span class="fc" id="L79">            Sesion sesion = sesionDTO.toEntity();</span>
+<span class="fc" id="L80">            sesion.setId(idSesion);</span>
+<span class="fc" id="L81">            sesionService.actualizarSesion(sesion);</span>
+<span class="fc" id="L82">            return ResponseEntity.ok(SesionDTO.fromEntity(sesion));</span>
+<span class="fc" id="L83">        }catch(SesionInexistente e){</span>
+<span class="fc" id="L84">            return ResponseEntity.notFound().build();</span>
+<span class="fc" id="L85">        }catch(PlanInexistente e){</span>
+<span class="fc" id="L86">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+
+    @DeleteMapping(&quot;/{idSesion}&quot;)
+    public ResponseEntity&lt;?&gt; borraSesion (@PathVariable Long idSesion){
+        try {
+<span class="fc" id="L93">            sesionService.deleteById(idSesion);</span>
+<span class="fc" id="L94">            return ResponseEntity.ok().build();</span>
+<span class="fc" id="L95">        } catch (SesionInexistente e) {</span>
+<span class="fc" id="L96">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

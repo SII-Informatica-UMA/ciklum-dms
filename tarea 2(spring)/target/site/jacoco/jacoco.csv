@@ -1,0 +1,25 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.controllers,GestionSesion,0,106,0,2,0,32,0,7,0,6
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.exceptions,SesionRepetidaException,3,0,0,0,2,0,1,0,1,0
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.exceptions,PlanInexistente,0,3,0,0,0,2,0,1,0,1
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.exceptions,SesionInexistente,0,3,0,0,0,2,0,1,0,1
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.services,SesionService.new ParameterizedTypeReference() {...},0,6,0,0,0,1,0,1,0,1
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.services,SesionService.new ParameterizedTypeReference() {...},0,6,0,0,0,1,0,1,0,1
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.services,SesionService,0,240,0,8,0,52,0,12,0,8
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.services,SesionService.new ParameterizedTypeReference() {...},0,6,0,0,0,1,0,1,0,1
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,SesionDTO,6,58,0,0,1,18,1,6,1,6
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,SesionDTO.SesionDTOBuilder,24,70,0,0,0,1,1,11,1,11
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,AsignacionEntrenamientoNuevoDTO,40,0,0,0,7,0,9,0,9,0
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,PlanDTO,0,16,0,0,0,4,0,4,0,4
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,AsignacionEntrenamientoDTO,26,0,0,0,5,0,6,0,6,0
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,AsignacionEntrenamientoNuevoDTO.AsignacionEntrenamientoNuevoDTOBuilder,36,0,0,0,1,0,6,0,6,0
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,SesionNuevaDTO,4,113,0,0,1,21,1,19,1,19
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,SesionNuevaDTO.SesionNuevaDTOBuilder,85,0,0,0,1,0,11,0,11,0
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,PlanNuevoDTO,19,31,0,0,2,6,2,9,2,9
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.dtos,PlanNuevoDTO.PlanNuevoDTOBuilder,47,0,0,0,1,0,7,0,7,0
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.entities,Sesion.SesionBuilder,29,65,0,0,0,1,2,10,2,10
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.entities,Sesion,209,203,69,9,54,42,41,22,2,22
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo,Application,5,7,0,0,2,2,1,2,1,2
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.security,SecurityConfguration,10,40,0,0,2,11,2,6,2,6
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.security,JwtUtil,19,108,4,0,2,22,3,9,1,9
+spring.jpa.demo,es.uma.informatica.sii.spring.jpa.demo.security,JwtRequestFilter,19,82,5,5,6,20,5,2,0,2
